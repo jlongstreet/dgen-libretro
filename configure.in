@@ -147,56 +147,56 @@ AS_IF(
 	[AC_MSG_FAILURE([joystick support seems unavailable])]
 )
 
-dnl Check for OpenGL support.
-AC_ARG_ENABLE(
-	[opengl],
-	[AS_HELP_STRING(
-		[--enable-opengl],
-		[enable OpenGL support [default=auto]]
-	)],
-	[USE_OPENGL=$enableval],
-	[USE_OPENGL=auto]
-)
-AS_IF(
-	[test "x$USE_OPENGL" != xno],
-	[AC_CHECK_HEADER(
-		[SDL_opengl.h],
-		[AC_SEARCH_LIBS(
-			[glEnd],
-			[GL opengl32 gl],
-			[USE_OPENGL=yes],
-			[AS_IF(
-				[test "x$cross_compiling" = xyes],
-				dnl When nothing works, use brute force.
-				[USE_OPENGL=no]
-				[AC_CHECK_LIB(
-					[GL],
-					[main],
-					[LIBS="-lGL $LIBS"]
-					[USE_OPENGL=yes]
-				)]
-				[AC_CHECK_LIB(
-					[opengl32],
-					[main],
-					[LIBS="-lopengl32 $LIBS"]
-					[USE_OPENGL=yes]
-				)]
-				[AC_CHECK_LIB(
-					[gl],
-					[main],
-					[LIBS="-lgl $LIBS"]
-					[USE_OPENGL=yes]
-				)],
-				[USE_OPENGL=no]
-			)]
-		)],
-		[USE_OPENGL=no]
-	)]
-)
-AS_IF(
-	[test "x$enable_opengl" = xyes -a "x$USE_OPENGL" = xno],
-	[AC_MSG_FAILURE([OpenGL support seems unavailable])]
-)
+#dnl Check for OpenGL support.
+#AC_ARG_ENABLE(
+#	[opengl],
+#	[AS_HELP_STRING(
+#		[--enable-opengl],
+#		[enable OpenGL support [default=auto]]
+#	)],
+#	[USE_OPENGL=$enableval],
+#	[USE_OPENGL=auto]
+#)
+#AS_IF(
+#	[test "x$USE_OPENGL" != xno],
+#	[AC_CHECK_HEADER(
+#		[SDL_opengl.h],
+#		[AC_SEARCH_LIBS(
+#			[glEnd],
+#			[GL opengl32 gl],
+#			[USE_OPENGL=yes],
+#			[AS_IF(
+#				[test "x$cross_compiling" = xyes],
+#				dnl When nothing works, use brute force.
+#				[USE_OPENGL=no]
+#				[AC_CHECK_LIB(
+#					[GL],
+#					[main],
+#					[LIBS="-lGL $LIBS"]
+#					[USE_OPENGL=yes]
+#				)]
+#				[AC_CHECK_LIB(
+#					[opengl32],
+#					[main],
+#					[LIBS="-lopengl32 $LIBS"]
+#					[USE_OPENGL=yes]
+#				)]
+#				[AC_CHECK_LIB(
+#					[gl],
+#					[main],
+#					[LIBS="-lgl $LIBS"]
+#					[USE_OPENGL=yes]
+#				)],
+#				[USE_OPENGL=no]
+#			)]
+#		)],
+#		[USE_OPENGL=no]
+#	)]
+#)
+#AS_IF(
+#	[test "x$enable_opengl" = xyes -a "x$USE_OPENGL" = xno],
+#	[AC_MSG_FAILURE([OpenGL support seems unavailable])]
+#)
 
 dnl Check for libarchive. Note that older versions of libarchive don't have
 dnl archive_read_support_format_raw().
@@ -505,7 +505,7 @@ DGEN_LIBS="$LIBS"
 LIBS="$TOBIN_LIBS"
 
 dnl Define everything.
-AS_IF([test "x$USE_OPENGL" = xyes], [AC_DEFINE([WITH_OPENGL])])
+#AS_IF([test "x$USE_OPENGL" = xyes], [AC_DEFINE([WITH_OPENGL])])
 AS_IF([test "x$USE_LIBARCHIVE" = xyes], [AC_DEFINE([WITH_LIBARCHIVE])])
 AS_IF([test "x$USE_DEBUGGER" = xyes], [AC_DEFINE([WITH_DEBUGGER])])
 AS_IF([test "x$USE_DEBUG" != xyes], [AC_DEFINE([NDEBUG])])
@@ -556,13 +556,12 @@ AC_OUTPUT(
 	[star/Makefile]
 	[musa/Makefile]
 	[mz80/Makefile]
-	[sdl/Makefile]
+	[libretro/Makefile]
 )
 
 AC_MSG_NOTICE([
 
 Front-end
-  OpenGL: $USE_OPENGL
   Joystick: $USE_JOYSTICK
   Crap TV filters: $USE_CTV
   hqx filters: $USE_HQX

@@ -2,13 +2,19 @@
 
 include $(top_srcdir)/Makefile.asm.am
 
-DIST_SUBDIRS = musa mz80 sdl star
+DIST_SUBDIRS = musa mz80 libretro star
 
 # SDL
-SUBDIRS = sdl
-AM_CPPFLAGS = -I$(top_srcdir) -I$(top_srcdir)/sdl
-dgen_DEPENDENCIES = sdl/libpd.a
-dgen_LDADD = sdl/libpd.a
+#SUBDIRS = sdl
+#AM_CPPFLAGS = -I$(top_srcdir) -I$(top_srcdir)/sdl
+#dgen_DEPENDENCIES = sdl/libpd.a
+#dgen_LDADD = sdl/libpd.a
+
+# libretro
+SUBDIRS = libretro
+AM_CPPFLAGS = -I$(top_srcdir) -I$(top_srcdir)/libretro
+dgen_DEPENDENCIES = libretro/libpd.a
+dgen_LDADD = libretro/libpd.a
 
 # Musashi
 if WITH_MUSA
