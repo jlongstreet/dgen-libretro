@@ -26,6 +26,7 @@ Makefile.in
 /mz80/makez80
 /mz80/mz80.c
 /mz80/x86-mz80.asm
+/libretro/pbm2df
 /sdl/pbm2df
 /sdl/dgenfont.cpp
 /star/star
